@@ -15,8 +15,8 @@ do
     curl $i |
     html2text |
     sed -n '/Details About the talk/,$p' | # remove extra space at the top of each talk
-    sed -n '/Programs &amp. initiatives/q;p' | # remove footer from **** Programs & initiatives ****
-    head -n-1 |  # remove header space
-    tail -n+2 > ted_transcripts/talk$counter.csv # remove footer and seperate each talk into a seperate file
+    tail -r | # reverse the order of the lines in its input
+    tail -n +45 |  # remove the footer space
+    tail -r > ted_transcripts/talk$counter.csv # return the order of the line and seperate each talk into a seperate file
     counter=$((counter+1))
 done
